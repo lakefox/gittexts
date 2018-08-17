@@ -1,4 +1,5 @@
 var nodemailer = require('nodemailer');
+const ch = require('cipherhash');
 
 var transporter = nodemailer.createTransport({
   host: "mail.privateemail.com",
@@ -6,7 +7,7 @@ var transporter = nodemailer.createTransport({
   secure: false,
   auth: {
     user: "mason@lakefox.net",
-    pass: "********"
+    pass: ch.unCipherHash("Z5YFA1PLahTLakawPsakhQ", process.env.key)
   }
 });
 
