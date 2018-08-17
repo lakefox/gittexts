@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>GitTexts</title>
+  </head>
+  <body>
+    <form class="" action="javascript:submit()" method="post">
+      <input type="text" id="feed" placeholder="https://github.com/lakefox.private.atom?token=AdjUvjXjhfyck_AcGGbqOf-XZt5W262pks65g2rbwA==">
+      <input type="tel" id ="number" placeholder="660 351 5674">
+      <select id="carrier">
+        <option value="@txt.att.net">At&t</option>
+        <option value="@tmomail.net ">T-Mobile</option>
+        <option value="@vtext.com">Verizon</option>
+        <option value="@messaging.sprintpcs.com ">Sprint</option>
+        <option value="@vmobl.com">Virgin Mobile</option>
+        <option value="@mmst5.tracfone.com">Tracfone</option>
+        <option value="@mymetropcs.com">Metro PCS</option>
+        <option value="@sms.myboostmobile.com">Boost Mobile</option>
+        <option value="@sms.cricketwireless.net">Cricket</option>
+        <option value="@text.republicwireless.com">Republic Wireless</option>
+        <option value="@msg.fi.google.com ">Google Fi</option>
+        <option value="number@email.uscc.net">U.S. Cellular</option>
+        <option value="@message.ting.com">Ting</option>
+        <option value="@mailmymobile.net">Consumer Cellular</option>
+        <option value="@cspire1.com">C-Spire</option>
+        <option value="@vtext.com">Page Plus</option>
+      </select>
+      <input type="submit">
+    </form>
+
+    <script type="text/javascript">
+    function submit() {
+      let req = {
+        feed: document.querySelector("#feed").value,
+        address: parse(document.querySelector("#number").value)+document.querySelector("#carrier").value
+      }
+      post("addUser", req).then((res) => {
+        console.log(res);
+      });
+    }
+
+    function parse(number) {
+      return number.replace(/ /g, "").replace(/-/g, "").replace(/\(/g, "").replace(/\)/g, "").replace(/\./g, "").slice(-10);
+    }
+
+    function post(name, value) {
+      var url = '/api';
+      var data = {store: {}};
+      if (typeof name == "object") {
+        for (var i = 0; i < name.length; i++) {
+          data.store[name[i]] = value[i];
+        }
+      } else {
+        data.store[name] = value;
+      }
+      return new Promise(function (resolve, reject) {
+        fetch(url, {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: new Headers({
+            'Content-Type': 'application/json'
+          })
+        }).then((res) => {
+          return res.json();
+        }).then((data) => {
+          resolve(data.res);
+        });
+      });
+    }
+    </script>
+  </body>
+</html>

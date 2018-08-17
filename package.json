@@ -1,0 +1,21 @@
+{
+  "name": "gittexts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "megaquery": "^1.1.6",
+    "nodemailer": "^4.6.8",
+    "rss-parser": "^3.4.3",
+    "schemejs": "^1.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "lakefox",
+  "license": "MIT"
+}
